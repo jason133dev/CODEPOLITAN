@@ -1,0 +1,14 @@
+# Status
+- [x] Pengenalan Ajax Request (14-10-2026)
+- [x] Mengenal Api (14-10-2026)
+- [x] Apa Itu Json (14-10-2026)
+- [x] Lebih Mudah Akses Web Api Dengan Postman Dan Hoppscotch (14-10-2026)
+- [x] Mengenal Http Verb Atau Http Method (14-10-2026)
+- [x] Penjelasan Kode Angka Dari Respon Http (14-10-2026)
+- [ ] Mengenal Base Url Dan Query String Di Web Api
+- [ ] Mengenal Data Di Http Header
+- [ ] Melakukan Request Dengan Xmlhttprequest
+- [ ] Melakukan Request Dengan Fetch
+- [ ] Melakukan Request Dengan Library Axios
+- [ ] Menambahkan Data Headers Di Request Menggunakan Axios
+- [ ] Menampilkan Daftar Acara Tv Dengan Axios
