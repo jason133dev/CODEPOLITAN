@@ -5,10 +5,10 @@
 - [x] Lebih Mudah Akses Web Api Dengan Postman Dan Hoppscotch (14-10-2026)
 - [x] Mengenal Http Verb Atau Http Method (14-10-2026)
 - [x] Penjelasan Kode Angka Dari Respon Http (14-10-2026)
-- [ ] Mengenal Base Url Dan Query String Di Web Api
-- [ ] Mengenal Data Di Http Header
-- [ ] Melakukan Request Dengan Xmlhttprequest
-- [ ] Melakukan Request Dengan Fetch
+- [x] Mengenal Base Url Dan Query String Di Web Api (15-10-2026)
+- [x] Mengenal Data Di Http Header (15-10-2026)
+- [x] Melakukan Request Dengan Xmlhttprequest (15-10-2026)
+- [x] Melakukan Request Dengan Fetch (15-10-2026)
 - [ ] Melakukan Request Dengan Library Axios
 - [ ] Menambahkan Data Headers Di Request Menggunakan Axios
 - [ ] Menampilkan Daftar Acara Tv Dengan Axios
