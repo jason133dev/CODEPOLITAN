@@ -8,7 +8,7 @@ const cari = async () => {
     const query = String(search.value).toLowerCase();
 
     // ambil data api
-    if (query != ``) {
+    if (query !== ``) {
         const dataApi = await axios.get(`https://api.tvmaze.com/search/shows?q=${query}`);
 
         // liat isi dataApi
@@ -32,16 +32,17 @@ const cari = async () => {
         search2.style.opacity = `1`;
 
         containerImg.style.opacity = `1`;
-    }
+    };
 };
-
-//------------------------------------------------------------------------------
 
 const cari2 = async () => {
     const query = String(search2.value).toLowerCase();
     // ambil data api
 
-    if (query != ``) {
+    if (query !== ``) {
+        // reset
+        containerImg.innerHTML = ``;
+
         const dataApi = await axios.get(`https://api.tvmaze.com/search/shows?q=${query}`);
 
         // liat isi dataApi
@@ -57,15 +58,16 @@ const cari2 = async () => {
                 let htmlGambar = `<img src="${linkGambar}">`;
                 containerImg.innerHTML += htmlGambar;
             };
-
-            // tampilan
-            search2.value = ``;
         });
+
+        // tampilan
+        search2.value = ``;
     };
-}
+};
 
 //------------------------------------------------------------------------------
 
+// event
 const enter = (e) => {
     if (e.key === `Enter`) {
         try {
@@ -82,13 +84,9 @@ const enter = (e) => {
 
 search.addEventListener(`keydown`, enter);
 
-//------------------------------------------------------------------------------ 
-
 const enter2 = (e) => {
     if (e.key === `Enter`) {
         try {
-            containerImg.innerHTML = ``;
-
             // mulai cari
             cari2();
         }
