@@ -1,0 +1,93 @@
+@font-face {
+    font-family: montserrat-regular;
+    src: url(Asset/font/Montserrat-Regular.ttf);
+}
+
+@font-face {
+    font-family: montserrat-semibold;
+    src: url(Asset/font/Montserrat-SemiBold.ttf);
+}
+
+@font-face {
+    font-family: montserrat-bold;
+    src: url(Asset/font/Montserrat-Bold.ttf);
+}
+
+@font-face {
+    font-family: montserrat-thin;
+    src: url(Asset/font/Montserrat-Thin.ttf);
+}
+
+:root {
+    --font-dasar: "montserrat-regular";
+    --navbar-color: rgba(54, 54, 54, 0.548);
+    --warna-npc: rgba(237, 239, 239, 0.537);
+    --warna-npc2: rgba(0, 0, 0, 0.537);
+    --background-color: rgb(54, 54, 54);
+    --background-color2: rgb(33, 33, 33);
+    --border-estetik: 2px rgb(93, 93, 93) solid;
+    --warna-list: rgb(206, 206, 206);
+    --warna-hitam-dasar: rgb(54, 54, 54);
+    --warna-abu-coret: rgb(107, 107, 107);
+    --border-button: 2px rgb(30, 30, 30) solid;
+    --warna-hamburger: rgb(41, 41, 41);
+    --warna-hitung: rgb(77, 77, 77);
+    --warna-button: rgb(41, 41, 41);
+    --pemisah: 1px solid #edefef22;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: var(--font-dasar);
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    user-select: none;
+    -webkit-user-select: none;
+    outline: none;
+    image-rendering: optimizeQuality;
+}
+
+body {
+    background-color: rgb(33, 33, 33);
+}
+
+.container {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #edefef;
+}
+
+#text {
+    width: 80%;
+    opacity: 0;
+    transition: opacity .5s ease-in-out;
+}
+
+#btn {
+    padding: 13.574px 27.320px;
+    font-size: clamp(0.6rem, 1cqw, 1.2rem);
+    margin: 1rem 0;
+    background-color: #edefef;
+    outline: none;
+    border: none;
+    color: var(--background-color);
+    border-radius: 2rem;
+    transition: background-color .5s ease, color .5s ease, translate .5s ease, opacity 1s ease-in-out;
+}
+
+#btn:hover {
+    color: #edefef;
+    background-color: rgb(56, 56, 56);
+    translate: 0 -3px;
+}

@@ -1,0 +1,109 @@
+@font-face {
+    font-family: montserrat-regular;
+    src: url(Asset/font/Montserrat-Regular.ttf);
+}
+
+@font-face {
+    font-family: montserrat-semibold;
+    src: url(Asset/font/Montserrat-SemiBold.ttf);
+}
+
+@font-face {
+    font-family: montserrat-bold;
+    src: url(Asset/font/Montserrat-Bold.ttf);
+}
+
+@font-face {
+    font-family: montserrat-thin;
+    src: url(Asset/font/Montserrat-Thin.ttf);
+}
+
+:root {
+    --font-dasar: "montserrat-regular";
+    --navbar-color: rgba(54, 54, 54, 0.548);
+    --warna-npc: rgba(237, 239, 239, 0.537);
+    --warna-npc2: rgba(0, 0, 0, 0.537);
+    --background-color: rgb(54, 54, 54);
+    --background-color2: rgb(33, 33, 33);
+    --border-estetik: 2px rgb(93, 93, 93) solid;
+    --warna-list: rgb(206, 206, 206);
+    --warna-hitam-dasar: rgb(54, 54, 54);
+    --warna-abu-coret: rgb(107, 107, 107);
+    --border-button: 2px rgb(30, 30, 30) solid;
+    --warna-hamburger: rgb(41, 41, 41);
+    --warna-hitung: rgb(77, 77, 77);
+    --warna-button: rgb(41, 41, 41);
+    --pemisah: 1px solid #edefef22;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: var(--font-dasar);
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    user-select: none;
+    -webkit-user-select: none;
+    outline: none;
+    image-rendering: optimizeQuality;
+}
+
+body {
+    background-color: rgb(33, 33, 33);
+}
+
+.container {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: #edefef;
+}
+
+.container-img {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    opacity: 0;
+}
+
+.container-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#search {
+    font-size: 3rem;
+    padding: .8rem;
+    border: none;
+    background: none;
+    color: #edefef;
+    opacity: 1;
+    transition: opacity .5s;
+}
+
+#search2 {
+    position: fixed;
+    top: 2rem;
+    left: 0;
+    right: 0;
+    margin: auto;
+    font-size: 1rem;
+    width: 25rem;
+    padding: .8rem;
+    border-radius: 4rem;
+    border: 1px solid #edefef82;
+    background: #0000002c;
+    color: #edefef;
+    opacity: 0;
+    transition: opacity .5s;
+}

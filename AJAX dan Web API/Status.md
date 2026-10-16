@@ -9,6 +9,6 @@
 - [x] Mengenal Data Di Http Header (15-10-2026)
 - [x] Melakukan Request Dengan Xmlhttprequest (15-10-2026)
 - [x] Melakukan Request Dengan Fetch (15-10-2026)
-- [ ] Melakukan Request Dengan Library Axios
-- [ ] Menambahkan Data Headers Di Request Menggunakan Axios
-- [ ] Menampilkan Daftar Acara Tv Dengan Axios
+- [x] Melakukan Request Dengan Library Axios
+- [x] Menambahkan Data Headers Di Request Menggunakan Axios
+- [x] Menampilkan Daftar Acara Tv Dengan Axios
