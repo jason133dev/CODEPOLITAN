@@ -31,7 +31,6 @@ const cari = async () => {
         search.value = ``;
         search.style.opacity = `0`;
         search2.style.opacity = `1`;
-
         containerImg.style.opacity = `1`;
     };
 };

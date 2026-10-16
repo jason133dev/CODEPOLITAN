@@ -73,6 +73,7 @@ body {
     grid-template-columns: repeat(3, 1fr);
     gap: 5px;
     opacity: 0;
+    transition: opacity 2s ease-in-out;
 }
 
 .container-img img {
@@ -88,7 +89,7 @@ body {
     background: none;
     color: #edefef;
     opacity: 1;
-    transition: opacity .5s;
+    transition: opacity 2s ease-in-out;
 }
 
 #search2 {
@@ -105,5 +106,5 @@ body {
     background: #0000002c;
     color: #edefef;
     opacity: 0;
-    transition: opacity .5s;
+    transition: opacity 5s ease-in-out;
 }
