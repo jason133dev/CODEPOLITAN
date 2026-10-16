@@ -20,8 +20,9 @@ const cari = async () => {
             // ambil data gambar dan tampilkan
             let linkGambar = e.show.image?.original;
 
+            let htmlGambar;
             if (linkGambar != undefined) {
-                let htmlGambar = `<img src="${linkGambar}">`;
+                htmlGambar = `<img src="${linkGambar}">`;
                 containerImg.innerHTML += htmlGambar;
             };
         });
@@ -54,8 +55,9 @@ const cari2 = async () => {
             // ambil data gambar dan tampilkan
             let linkGambar = e.show.image?.original;
 
+            let htmlGambar;
             if (linkGambar != undefined) {
-                let htmlGambar = `<img src="${linkGambar}">`;
+                htmlGambar = `<img src="${linkGambar}">`;
                 containerImg.innerHTML += htmlGambar;
             };
         });
