@@ -16,11 +16,11 @@ const cari = async () => {
 
         // ambil data
         const dataJson = await dataApi.data;
+        let htmlGambar;
         dataJson.forEach((e) => {
             // ambil data gambar dan tampilkan
             let linkGambar = e.show.image?.original;
 
-            let htmlGambar;
             if (linkGambar != undefined) {
                 htmlGambar = `<img src="${linkGambar}">`;
                 containerImg.innerHTML += htmlGambar;
@@ -51,11 +51,11 @@ const cari2 = async () => {
 
         // ambil data
         const dataJson = await dataApi.data;
+        let htmlGambar;
         dataJson.forEach((e) => {
             // ambil data gambar dan tampilkan
             let linkGambar = e.show.image?.original;
 
-            let htmlGambar;
             if (linkGambar != undefined) {
                 htmlGambar = `<img src="${linkGambar}">`;
                 containerImg.innerHTML += htmlGambar;
