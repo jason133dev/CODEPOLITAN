@@ -3,7 +3,20 @@
 - [x] Prequisite Yang Harus Ada (17-10-2026)
 - [x] Apa itu Node JS dan Kenapa di Pakai di Industri (17-10-2026)
 - [x] Perbedaan Node JS VS Browser JavaScript (17-10-2026)
-- [ ] Cara Kerja V8 Engine
-- [ ] Apa itu Node Js Event Loop
-- [ ] Single Thread VS Multi Thread
+- [x] Cara Kerja V8 Engine (20-10-2026)
+- [x] Apa itu Node Js Event Loop (20-10-2026)
+- [x] Single Thread VS Multi Thread (20-10-2026)
+- [x] Use Case Backend Node JS (20-10-2026)
+- [x] Install Node JS (20-10-2026)
+- [x] REPL Mode (20-10-2026)
+- [x] Persiapan, Extension dan Running Code (20-10-2026)
+- [x] Membaca File (20-10-2026)
+- [ ] Menulis File 
+- [ ] Append File
+- [ ] Menghapus File
+- [ ] Stream File
+- [ ] Latihan Logging File
+- [ ] Path
+- [ ] OS
+- [ ] Membuat HTTP Server dari Nol
 ...
