@@ -11,10 +11,10 @@
 - [x] REPL Mode (20-10-2026)
 - [x] Persiapan, Extension dan Running Code (20-10-2026)
 - [x] Membaca File (20-10-2026)
-- [ ] Menulis File 
-- [ ] Append File
-- [ ] Menghapus File
-- [ ] Stream File
+- [x] Menulis File (21-10-2026)
+- [x] Append File (21-10-2026)
+- [x] Menghapus File (21-10-2026)
+- [x] Stream File (21-10-2026)
 - [ ] Latihan Logging File
 - [ ] Path
 - [ ] OS
