@@ -15,8 +15,8 @@
 - [x] Append File (21-10-2026)
 - [x] Menghapus File (21-10-2026)
 - [x] Stream File (21-10-2026)
-- [ ] Latihan Logging File
-- [ ] Path
+- [x] Latihan Logging File
+- [x] Path
 - [ ] OS
 - [ ] Membuat HTTP Server dari Nol
 ...

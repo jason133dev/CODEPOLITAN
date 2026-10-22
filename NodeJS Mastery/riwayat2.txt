@@ -1,2 +1,8 @@
 Transaksi berhasil: Rp.50.000
 Transaksi berhasil: Rp.60.000
+Transaksi berhasil: Rp.60.000
+Transaksi berhasil: Rp.100.000
+Transaksi berhasil: Rp.500.000
+Transaksi berhasil: Rp.500.000
+Transaksi berhasil: Rp.500.000
+Transaksi berhasil: Rp.600.000

@@ -1,0 +1,5 @@
+[22/9/2026] INFO - Transaksi Baru  | {"message":"Berhasil menambahkan file"}
+[22/9/2026] INFO - Transaksi Baru  | {"message":"Berhasil menambahkan file"}
+[22/9/2026] INFO - Transaksi Baru  | {"message":"Berhasil menambahkan file"}
+[22/9/2026] ERROR - Transaksi Gagal  | {"message":"Gagal menambahkan file fs.promises.appexndFile is not a function"}
+[22/9/2026] INFO - Transaksi Baru  | {"message":"Berhasil menambahkan file"}
