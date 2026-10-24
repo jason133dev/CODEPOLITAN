@@ -19,4 +19,43 @@
 - [x] Path (22-10-2026)
 - [x] OS (24-10-2026)
 - [x] Membuat HTTP Server dari Nol (24-10-2026)
+- [ ] Routing Manual
+- [ ] Parsing URL dan Query 
+- [ ] Mengirim Response JSON
+- [ ] Handle POST Request
+- [ ] Status Code dan Header
+- [ ] Membuat REST API Bagian 1
+- [ ] Membuat REST API Bagian 2
+- [ ] Membuat REST API Bagian 3
+- [ ] Behind the Scene Event Loop
+- [ ] Call Stack
+- [ ] Apa itu Package JSON
+- [ ] Menambahkan dependencies
+- [ ] Custom scripts
+- [ ] Dependencies VS Devdependencies
+- [ ] Simple Backends
+- [ ] Mekanisme Process-env
+- [ ] Best Practice Biar gak Data Leaks
+- [ ] Nerapin Semantic Version
+- [ ] Security for Backend Dev
+- [ ] Persiapan Security
+- [ ] CORS
+- [ ] Validasi Input Bagian 1
+- [ ] Validasi Input Bagian 2
+- [ ] Validasi Input Bagian 3
+- [ ] Sanitasi
+- [ ] Basic Auth Bagian 1
+- [ ] Basic Auth Bagian 2
+- [ ] Basic Auth Bagian 3
+- [ ] Hashing Bagian 1
+- [ ] Hashing Bagian 2
+- [ ] Farmasi Management Stock Prepare
+- [ ] Farmasi Management Stock getObat
+- [ ] Farmasi Management Stock getObatById
+- [ ] Farmasi Management Stock createObat 
+- [ ] Farmasi Management Stock updateObat
+- [ ] Farmasi Management Stock deleteObat
+- [ ] Farmasi Management Stock jualObat
+- [ ] Farmasi Management Stock getLaporan
+- [ ] Improve Fitur
 ...
