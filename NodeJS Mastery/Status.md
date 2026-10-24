@@ -19,7 +19,7 @@
 - [x] Path (22-10-2026)
 - [x] OS (24-10-2026)
 - [x] Membuat HTTP Server dari Nol (24-10-2026)
-- [ ] Routing Manual
+- [x] Routing Manual
 - [ ] Parsing URL dan Query 
 - [ ] Mengirim Response JSON
 - [ ] Handle POST Request
