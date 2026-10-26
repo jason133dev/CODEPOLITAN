@@ -21,7 +21,7 @@
 - [x] Membuat HTTP Server dari Nol (24-10-2026)
 - [x] Routing Manual
 - [x] Parsing URL dan Query 
-- [ ] Mengirim Response JSON
+- [x] Mengirim Response JSON
 - [ ] Handle POST Request
 - [ ] Status Code dan Header
 - [ ] Membuat REST API Bagian 1
