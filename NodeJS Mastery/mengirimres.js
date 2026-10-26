@@ -21,6 +21,7 @@ const server = http.createServer((req, res) => {
         req.on(`data`, (chunk) => {
             // .toString() itu adalah fungsi yang ada di chunk yang bisa membuat data yang aslinya tadi biner, jadi string
             body += chunk.toString();
+            console.log(chunk)
         })
 
         // req.on(`end`) itu bakalan nyala jika req.(`data`) selesai
