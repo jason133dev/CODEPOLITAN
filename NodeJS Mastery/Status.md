@@ -19,10 +19,10 @@
 - [x] Path (22-10-2026)
 - [x] OS (24-10-2026)
 - [x] Membuat HTTP Server dari Nol (24-10-2026)
-- [x] Routing Manual
-- [x] Parsing URL dan Query 
-- [x] Mengirim Response JSON
-- [ ] Handle POST Request
+- [x] Routing Manual (25-10-2026)
+- [x] Parsing URL dan Query (25-10-2026)
+- [x] Mengirim Response JSON (26-10-2026)
+- [x] Handle POST Request (26-10-2026)
 - [ ] Status Code dan Header
 - [ ] Membuat REST API Bagian 1
 - [ ] Membuat REST API Bagian 2
