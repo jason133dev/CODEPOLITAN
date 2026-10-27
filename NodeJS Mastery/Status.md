@@ -58,4 +58,3 @@
 - [ ] Farmasi Management Stock jualObat
 - [ ] Farmasi Management Stock getLaporan
 - [ ] Improve Fitur
-...
