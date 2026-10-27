@@ -91,7 +91,7 @@ const server = http.createServer(async (req, res) => {
         } catch (err) {
             sendJSON(res, 400, { error: `Body harus berupa JSON` });
         }
-    } else if (path.startsWith(`/users`) && method === `PUT`) { //lanjut besok }
+    } else if (path.startsWith(`/users`) && method === `PUT`) {}
 });
 
 const port = 3000;
