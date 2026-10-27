@@ -23,7 +23,7 @@
 - [x] Parsing URL dan Query (25-10-2026)
 - [x] Mengirim Response JSON (26-10-2026)
 - [x] Handle POST Request (26-10-2026)
-- [ ] Status Code dan Header
+- [x] Status Code dan Header (27-10-2026)
 - [ ] Membuat REST API Bagian 1
 - [ ] Membuat REST API Bagian 2
 - [ ] Membuat REST API Bagian 3
