@@ -1,6 +1,8 @@
 const { rejects } = require("assert");
 const { resolve } = require("dns");
 const http = require(`http`);
+const { send } = require("process");
+const { start } = require("repl");
 
 // database contoh
 let users = [
@@ -53,21 +55,17 @@ const server = http.createServer(async (req, res) => {
     const path = bacaUrl.pathname;
     const method = req.method;
 
-    if (method === `OPTION`) {
+    if (method === `OPTIONS`) {
         return res.end()
-    }
-
-    if (path === `/users` && method === `GET`) {
+    } else if (path === `/users` && method === `GET`) {
         sendJSON(res, 200, users);
 
         // .startWith() itu hanya mencocokkan bagian awal saja
-    } else if (path.startsWith(`/users`) && method === `GET`) {
+    } else if (path.startsWith(`/users/`) && method === `GET`) {
         // parseInt(path.split(`/`)[2]) ini cara bacanya adalah pisah urlnya berdasarkan `/`
         const id = parseInt(path.split(`/`)[2]);
-        // .find berfungsi untuk mencari 1 data spesifik didalam array
-        const ambilUser = users.find((e) => {
-            e.id === id;
-        });
+        // .find berfungsi untuk mencari objek dalam array dan return objek itu dari ciri ciri yang diberikan (kasus ini cirinya itu ID)
+        const ambilUser = users.find(e => e.id === id);
 
         if (ambilUser) {
             sendJSON(res, 200, ambilUser);
@@ -91,10 +89,49 @@ const server = http.createServer(async (req, res) => {
         } catch (err) {
             sendJSON(res, 400, { error: `Body harus berupa JSON` });
         }
-    } else if (path.startsWith(`/users`) && method === `PUT`) {}
+    } else if (path.startsWith(`/users/`) && method === `PUT`) {
+        const id = parseInt(path.split(`/`)[2]);
+        // berbeda dengan .find, .findIndex ini akan cari posisi objek dalam array, lalu return index tersebut
+        // cara bacanya, cari di users yang memiliki id: === id, lalu kasih tau index ke berapa
+        const userIndex = users.findIndex(e => e.id === id);
+
+        // jika .fundIndex tidak menemukannya, maka akan return -1
+        if (userIndex === -1) {
+            return sendJSON(res, 404, { error: `User tidak ditemukan` });
+        }
+
+        try {
+            const data = await bacaBody(req);
+
+            if (!data.nama || !data.email) {
+                return sendJSON(res, 404, { error: `Nama dan Email wajib diisi` });
+            }
+
+            // replace data di users dengan data baru
+            users[userIndex] = { id: id, ...data };
+            sendJSON(res, 200, users[userIndex]);
+        } catch (err) {
+            sendJSON(res, 404, { error: `Body harus berupa JSON` });
+        }
+    } else if (path.startsWith(`/users/`) && method === `DELETE`) {
+        const id = parseInt(path.split(`/`)[2]);
+        const userIndex = users.findIndex(e => e.id === id);
+
+        if (userIndex === -1) {
+            return sendJSON(res, 404, { error: `User tidak ditemukan` });
+        }
+
+        // cara baca .slice, .splice dengan angka 1 akan hapus array users[userIndex] , jika 2 berarti hapus array selanjutnya 
+        users.splice(users[userIndex], 1);
+        sendJSON(res, 200, { message: `User Berhasil Dihapus` });
+    } else {
+        sendJSON(res, 404, { error: `Route tidak ditemukan`});
+    }
 });
+
+// -------------------------------------------------------------------------------------
 
 const port = 3000;
 server.listen(port, () => {
     console.log(`Server berjalan di http://localhost:${port}`);
-})
+});

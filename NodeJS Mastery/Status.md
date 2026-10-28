@@ -24,9 +24,9 @@
 - [x] Mengirim Response JSON (26-10-2026)
 - [x] Handle POST Request (26-10-2026)
 - [x] Status Code dan Header (27-10-2026)
-- [ ] Membuat REST API Bagian 1
-- [ ] Membuat REST API Bagian 2
-- [ ] Membuat REST API Bagian 3
+- [x] Membuat REST API Bagian 1 (28-10-2026)
+- [x] Membuat REST API Bagian 2 (28-10-2026)
+- [x] Membuat REST API Bagian 3 (28-10-2026)
 - [ ] Behind the Scene Event Loop
 - [ ] Call Stack
 - [ ] Apa itu Package JSON
