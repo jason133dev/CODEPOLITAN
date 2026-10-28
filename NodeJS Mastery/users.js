@@ -1,8 +1,4 @@
-const { rejects } = require("assert");
-const { resolve } = require("dns");
 const http = require(`http`);
-const { send } = require("process");
-const { start } = require("repl");
 
 // database contoh
 let users = [
