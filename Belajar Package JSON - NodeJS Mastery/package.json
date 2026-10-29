@@ -1,0 +1,26 @@
+{
+  "name": "belajar-package-json---nodejs-mastery",
+  "version": "1.0.0",
+  "description": "belajar package json",
+  "keywords": [
+    "node",
+    "js",
+    "js",
+    "npm"
+  ],
+  "license": "ISC",
+  "author": "Jason Lee",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "express": "^5.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
