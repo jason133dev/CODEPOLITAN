@@ -34,7 +34,7 @@
 - [x] Custom scripts (29-10-2026)
 - [x] Dependencies VS Devdependencies (29-10-2026)
 - [x] Simple Backends (29-10-2026)
-- [ ] Mekanisme Process-env
+- [x] Mekanisme Process-env (01-11-2026)
 - [ ] Best Practice Biar gak Data Leaks
 - [ ] Nerapin Semantic Version
 - [ ] Security for Backend Dev
