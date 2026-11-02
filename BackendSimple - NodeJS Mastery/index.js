@@ -50,7 +50,10 @@ app.post(`/api/login`, (req, res) => {
 
     // logic login dengan retrun boolean
     const loginUser = cariUser.nama === nama && cariUser.email === email;
-    const loginAdmin = cariUser.nama === process.env.ADMIN_NAME && cariUser.email === process.env.ADMIN_EMAIL;
+    
+    const ADMIN_NAME = process.env.ADMIN_NAME;
+    const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+    const loginAdmin = cariUser.nama === ADMIN_NAME && cariUser.email === ADMIN_EMAIL;
 
     // kirim res
     if (loginAdmin) {
