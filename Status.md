@@ -35,10 +35,10 @@
 - [x] Dependencies VS Devdependencies (29-10-2026)
 - [x] Simple Backends (29-10-2026)
 - [x] Mekanisme Process-env (01-11-2026)
-- [ ] Best Practice Biar gak Data Leaks
-- [ ] Nerapin Semantic Version
-- [ ] Security for Backend Dev
-- [ ] Persiapan Security
+- [x] Best Practice Biar gak Data Leaks (05-11-2026)
+- [x] Nerapin Semantic Version (05-11-2026)
+- [x] Security for Backend Dev (05-11-2026)
+- [x] Persiapan Security (05-11-2026)
 - [ ] CORS
 - [ ] Validasi Input Bagian 1
 - [ ] Validasi Input Bagian 2

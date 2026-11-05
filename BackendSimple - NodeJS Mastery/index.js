@@ -1,6 +1,8 @@
 require(`dotenv`).config();
 const express = require(`express`);
 const app = express();
+const port = process.env.PORT;
+const cowsay = require(`cowsay`);
 
 // --------------------------------------------------------------------
 
@@ -69,8 +71,6 @@ app.get(`/api/dashboard`, (req, res) => {
 
 // --------------------------------------------------------------------
 
-const port = process.env.PORT;
-const cowsay = require(`cowsay`);
 app.listen(port, () => {
     console.log(
         cowsay.say({
