@@ -1,7 +1,6 @@
 require(`dotenv`).config();
 const express = require(`express`);
 const app = express();
-const port = process.env.port;
 
 // --------------------------------------------------------------------
 
@@ -34,7 +33,7 @@ const sendResAd = (res, status, message) => {
 
 // --------------------------------------------------------------------
 
-app.use(express.json())
+app.use(express.json());
 
 app.get(`/`, (req, res) => {
     sendRes(res, 200, ``, `Selamat datang ke API Login, coba kirim req POST ke /api/login`)
@@ -50,7 +49,7 @@ app.post(`/api/login`, (req, res) => {
 
     // logic login dengan retrun boolean
     const loginUser = cariUser.nama === nama && cariUser.email === email;
-    
+
     const ADMIN_NAME = process.env.ADMIN_NAME;
     const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
     const loginAdmin = cariUser.nama === ADMIN_NAME && cariUser.email === ADMIN_EMAIL;
@@ -63,8 +62,21 @@ app.post(`/api/login`, (req, res) => {
     }
 });
 
+app.get(`/api/dashboard`, (req, res) => {
+    const features = [];
+    sendRes(res, 200, ``, `Selamat datand di dashboard API`)
+});
+
 // --------------------------------------------------------------------
 
+const port = process.env.PORT;
+const cowsay = require(`cowsay`);
 app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
+    console.log(
+        cowsay.say({
+            text: `Server running on http://localhost:${port}`,
+            e: `oo`,
+            T: `U `
+        })
+    );
 });
