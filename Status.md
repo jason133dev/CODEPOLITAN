@@ -39,7 +39,7 @@
 - [x] Nerapin Semantic Version (05-11-2026)
 - [x] Security for Backend Dev (05-11-2026)
 - [x] Persiapan Security (05-11-2026)
-- [ ] CORS
+- [x] CORS (07-11-2026)
 - [ ] Validasi Input Bagian 1
 - [ ] Validasi Input Bagian 2
 - [ ] Validasi Input Bagian 3

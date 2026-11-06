@@ -1,14 +1,33 @@
-require(`dotenv`).config();
-const express = require(`express`);
+// npm library
+import dotenv from 'dotenv';
+dotenv.config();
+import express from 'express';
+import cowsay from 'cowsay';
+import cors from 'cors';
+
+// ----------------------------------------------------------------------------------
+
+// my library
+import corsSetting from './middleware/cors/corsSetting.js';
+
+// ----------------------------------------------------------------------------------
+
+// global
 const app = express();
 const port = process.env.PORT;
-const cowsay = require(`cowsay`);
+const corsConfig = corsSetting.corsDefault;
+const corsConfigDev = corsSetting.corsDev;
+
+// ----------------------------------------------------------------------------------
 
 // middleware
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.get(`/`, (req, res) => {
+// ----------------------------------------------------------------------------------
+
+// req and res dengan cors dev
+app.get(`/`, cors(corsConfigDev), (req, res) => {
     res.status(200);
     res.json({
         message: `Backend Security Demo`,
@@ -21,6 +40,18 @@ app.get(`/`, (req, res) => {
     });
 });
 
+// req and res dengan extra pengamanan cors
+app.get(`/test-cors`, cors(corsConfig), (req, res) => {
+    res.status(200);
+    res.json({
+        message: `CORS is running`,
+        origin: req.headers.origin,
+        time: new Date().toLocaleDateString(`en-GB`)
+    });
+});
+
+// ----------------------------------------------------------------------------------
+
 // listen
 app.listen(port, () => {
     console.log(
@@ -32,5 +63,7 @@ app.listen(port, () => {
     );
 });
 
+// ----------------------------------------------------------------------------------
+
 // export
-module.exports = app;
+export default app;
