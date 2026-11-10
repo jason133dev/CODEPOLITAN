@@ -8,7 +8,7 @@ import cors from 'cors';
 // ----------------------------------------------------------------------------------
 
 // my library
-import corsSetting from './middleware/cors/corsSetting.js';
+import corsSetting from './middleware/corsSetting.js';
 
 // ----------------------------------------------------------------------------------
 
