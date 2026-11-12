@@ -24,9 +24,10 @@ const isValidPhone = (phone) => {
     return phoneRegex.test(phone);
 };
 
-const validateRequire = (fields, data) => {
+const validateEmpty = (fields, data) => {
     const missing = [];
 
+    // fields berisi array yang memberi tahu data[e] nilai key nya sehingga bisa mengecek datanya berdasarkan key dari fields tersebut
     fields.forEach((e) => {
         if (!data[e] || data[e].toString().trim() === ``) {
             missing.push(e);
@@ -38,4 +39,74 @@ const validateRequire = (fields, data) => {
 
 // ---------------------------------------------------------------------
 
-export default { isValidEmail, isValidPassword, isValidUserName, isValidPhone, validateRequire };
+const validateRegister = (req, res, next) => {
+    const errors = [];
+    const missing = validateEmpty([`email`, `password`, `username`, `confirmPassword`], req.body);
+    const { email, password, username, confirmPassword } = req.body;
+
+    if (missing.length > 0) {
+        return res.status(400).json({
+            success: false,
+            error: `Missing required fields: ${missing.join(`,`)}`
+        });
+    }
+
+    if (!isValidEmail(email)) {
+        errors.push(`Format email tidak valid`);
+    }
+
+    if (!isValidPassword(password)) {
+        errors.push(`Password kurang dari 7 angka/huruf, dan harus harus menyertakan huruf kapital serta angka`);
+    }
+
+    if (!isValidUserName(username)) {
+        errors.push(`Username harus 3 - 20 karakter dan hanya huruf, angka dan underscore`);
+    }
+
+    if (confirmPassword !== password) {
+        errors.push(`Password dan Confirm Password tidak sama`);
+    }
+
+    if (errors.length > 0) {
+        return res.status(400).json({
+            success: false,
+            error: errors
+        });
+    }
+
+    next();
+};
+
+const validateLogin = (req, res, next) => {
+    const errors = [];
+    const missing = validateEmpty([`email`, `password`], req.body);
+    const { email, password } = req.body;
+
+    if (missing.length > 0) {
+        return res.status(400).json({
+            success: false,
+            error: `Missing required fields: ${missing.join(`,`)}`
+        });
+    }
+
+    if (!isValidEmail(email)) {
+        errors.push(`Format email tidak valid`);
+    }
+
+    if (!isValidPassword(password)) {
+        errors.push(`Password kurang dari 7 angka/huruf, dan harus harus menyertakan huruf kapital serta angka`);
+    }
+
+    if (errors.length > 0) {
+        return res.status(400).json({
+            success: false,
+            error: errors
+        });
+    }
+
+    next();
+};
+
+// ---------------------------------------------------------------------
+
+export default { validateRegister, validateLogin };
