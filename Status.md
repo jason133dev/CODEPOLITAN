@@ -40,8 +40,8 @@
 - [x] Security for Backend Dev (05-11-2026)
 - [x] Persiapan Security (05-11-2026)
 - [x] CORS (07-11-2026)
-- [ ] Validasi Input Bagian 1
-- [ ] Validasi Input Bagian 2
+- [x] Validasi Input Bagian 1 (10-11-2026)
+- [x] Validasi Input Bagian 2 (12-11-2026)
 - [ ] Validasi Input Bagian 3
 - [ ] Sanitasi
 - [ ] Basic Auth Bagian 1
