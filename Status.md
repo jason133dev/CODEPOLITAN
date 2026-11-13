@@ -42,7 +42,7 @@
 - [x] CORS (07-11-2026)
 - [x] Validasi Input Bagian 1 (10-11-2026)
 - [x] Validasi Input Bagian 2 (12-11-2026)
-- [ ] Validasi Input Bagian 3
+- [x] Validasi Input Bagian 3 (13-11-2026)
 - [ ] Sanitasi
 - [ ] Basic Auth Bagian 1
 - [ ] Basic Auth Bagian 2
