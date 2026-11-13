@@ -3,13 +3,13 @@ import dotenv from 'dotenv';
 dotenv.config();
 import express from 'express';
 import cowsay from 'cowsay';
-import cors from 'cors';
 
 // ----------------------------------------------------------------------------------
 
-// my library
-import corsSetting from './middleware/corsSetting.js';
-import validator from './middleware/validator.js';
+// middleware
+import cors from './middleware/cors.js';
+import validator from './middleware/manualVersion/validator.js';
+import validatorAndSanitize from './middleware/validatorAndSanitize.js';
 
 // ----------------------------------------------------------------------------------
 
@@ -25,12 +25,13 @@ app.use(express.urlencoded({ extended: true }));
 // ----------------------------------------------------------------------------------
 
 // req and res dengan cors dev
-app.get(`/`, cors(corsSetting.corsDev), (req, res) => {
+app.get(`/`, cors.corsDev, (req, res) => {
     res.status(200);
     res.json({
         message: `Backend Security Demo`,
         endpoint: {
             cors: `GET/test-cors`,
+            validator: `POST/validator`,
             sanitization: `POST/sanitize`,
             auth: `GET/protected (Basic Auth)`,
             hashing: `POST/register`
@@ -39,7 +40,7 @@ app.get(`/`, cors(corsSetting.corsDev), (req, res) => {
 });
 
 // req and res dengan extra pengamanan cors
-app.get(`/test-cors`, cors(corsSetting.corsDefault), (req, res) => {
+app.get(`/test-cors`, cors.corsDefault, (req, res) => {
     res.status(200);
     res.json({
         message: `CORS is running`,
@@ -49,7 +50,7 @@ app.get(`/test-cors`, cors(corsSetting.corsDefault), (req, res) => {
 });
 
 // pakai validator untuk register
-app.post(`/sanitize/register`, cors(corsSetting.corsDefault), validator.validateRegister, (req, res) => {
+app.post(`/validator/register`, validator.validateRegister, (req, res) => {
     res.status(200);
     res.json({
         message: `Success register new account`,
@@ -58,13 +59,23 @@ app.post(`/sanitize/register`, cors(corsSetting.corsDefault), validator.validate
     });
 });
 
-// pakai validator untuk register
-app.post(`/sanitize/login`, cors(corsSetting.corsDefault), validator.validateLogin, (req, res) => {
+// pakai validator untuk login
+app.post(`/validator/login`, validator.validateLogin, (req, res) => {
     res.status(200);
     res.json({
         message: `Success login to account`,
         data: req.body,
         time: new Date().toLocaleDateString(`en-GB`)
+    });
+});
+
+// validator + sanitize
+app.post(`/validate/sanitize/register`, validatorAndSanitize.sanitizeAndValidateRegister, (req, res) => {
+    res.status(200);
+    res.json({
+        original: req.body,
+        sanitized: req.body,
+        message: `Data has been cleaned`
     });
 });
 

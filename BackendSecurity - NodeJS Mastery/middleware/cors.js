@@ -1,4 +1,8 @@
-const corsDefault = {
+import cors from 'cors';
+
+// ----------------------------------------------------------------------------------
+
+const corsDefaultconf = {
     origin: (origin, isAllowed) => {
         const allowedOrigins = [
             `http://localhost:8080`,
@@ -23,15 +27,18 @@ const corsDefault = {
     status: `Success added CORS Security Default`
 };
 
-// --------------------------------------------------------------------------
-
-const corsDev = {
+const corsDevconf = {
     origin: `*`,
     credentials: true,
     methods: [`GET`, `POST`, `PUT`, `DELETE`, `OPTIONS`],
     allowedHeaders: [`Content-Type`, `Authorization`, `X-Requested-With`],
     status: `Success added CORS Security dev`
 };
+
+// ----------------------------------------------------------------------------------
+
+const corsDefault = cors(corsDefaultconf);
+const corsDev = cors(corsDevconf);
 
 // ----------------------------------------------------------------------------------
 
