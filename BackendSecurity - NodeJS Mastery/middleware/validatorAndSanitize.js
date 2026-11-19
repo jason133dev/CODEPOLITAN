@@ -3,13 +3,14 @@ import validator from 'validator';
 // --------------------------------------------------------------------
 
 const sanitizeAndValidateRegister = (req, res, next) => {
-    if (!req.body || Object.keys(req.body).length == 0) return res.status(400).json({ error: `No body detected` });
+    let error = [];
+
+    if (!req.body || Object.keys(req.body).length == 0) { error.push("No body detected"); }
+
+    const { email, password, username, confirmPassword } = req.body;
+    if (!email || !password || !username || !confirmPassword) { error.push("Incorrect or missing key"); } 
 
     if (req.body) {
-        const { email, password, username, confirmPassword } = req.body;
-
-        let error = [];
-
         if (email) {
             const check = validator.normalizeEmail(validator.trim(email));
             if (!validator.isEmail(check)) {
@@ -33,10 +34,10 @@ const sanitizeAndValidateRegister = (req, res, next) => {
         if (confirmPassword !== password) {
             error.push("Password tidak sama");
         }
+    }
 
-        if (error.length > 0) {
-            return res.status(400).json({ errors: error });
-        }
+    if (error.length > 0) {
+        return res.status(400).json({ errors: error });
     }
 
     next();
