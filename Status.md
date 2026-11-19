@@ -43,7 +43,7 @@
 - [x] Validasi Input Bagian 1 (10-11-2026)
 - [x] Validasi Input Bagian 2 (12-11-2026)
 - [x] Validasi Input Bagian 3 (13-11-2026)
-- [ ] Sanitasi
+- [x] Sanitasi (19-11-2026)
 - [ ] Basic Auth Bagian 1
 - [ ] Basic Auth Bagian 2
 - [ ] Basic Auth Bagian 3

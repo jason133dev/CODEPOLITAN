@@ -8,7 +8,7 @@ import cowsay from 'cowsay';
 
 // middleware
 import cors from './middleware/cors.js';
-import validator from './middleware/manualVersion/validator.js';
+import validatorManual from './middleware/manualVersion/validator.js';
 import validatorAndSanitize from './middleware/validatorAndSanitize.js';
 
 // ----------------------------------------------------------------------------------
@@ -50,7 +50,7 @@ app.get(`/test-cors`, cors.corsDefault, (req, res) => {
 });
 
 // pakai validator untuk register
-app.post(`/validator/register`, validator.validateRegister, (req, res) => {
+app.post(`/validator/register`, validatorManual.validateRegister, (req, res) => {
     res.status(200);
     res.json({
         message: `Success register new account`,
@@ -60,7 +60,7 @@ app.post(`/validator/register`, validator.validateRegister, (req, res) => {
 });
 
 // pakai validator untuk login
-app.post(`/validator/login`, validator.validateLogin, (req, res) => {
+app.post(`/validator/login`, validatorManual.validateLogin, (req, res) => {
     res.status(200);
     res.json({
         message: `Success login to account`,
@@ -73,7 +73,6 @@ app.post(`/validator/login`, validator.validateLogin, (req, res) => {
 app.post(`/validate/sanitize/register`, validatorAndSanitize.sanitizeAndValidateRegister, (req, res) => {
     res.status(200);
     res.json({
-        original: req.body,
         sanitized: req.body,
         message: `Data has been cleaned`
     });
