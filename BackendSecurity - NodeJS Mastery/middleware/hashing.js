@@ -4,9 +4,9 @@ import bcrypt from 'bcrypt';
 
 // ------------------------------------- export module -------------------------------------
 
-const hashingPassword = async (req, res, next) => {
+const hashingPasswordRegister = async (req, res, next) => {
     try {
-        const { password } = req.body
+        const { password } = req.body;
         const hash = await bcrypt.hash(password, 10);
 
         // create new key
@@ -15,10 +15,11 @@ const hashingPassword = async (req, res, next) => {
 
         next();
     } catch (error) {
-        return res.status(500).json({ error: 'Internal server error during password hashing' });
+        console.log('-------------------------------------\n internal server error during password hashing \n-------------------------------------');
+        return res.status(500).json({ error: `Internal server error during password hashing: ${error}` });
     }
 };
 
 // ------------------------------------- export -------------------------------------
 
-export default { hashingPassword };
+export default { hashingPasswordRegister };

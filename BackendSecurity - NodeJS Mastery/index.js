@@ -24,8 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // req and res dengan cors dev
 app.get(`/`, cors.corsDev, (req, res) => {
-    res.status(200);
-    res.json({
+    res.status(200).json({
         message: `Backend Security Demo`,
         MateriBelajar: 'cors, validator and sanitization, auth, hashing'
     });
@@ -33,26 +32,31 @@ app.get(`/`, cors.corsDev, (req, res) => {
 
 // cors
 app.get('/test-cors', cors.corsDefault, (req, res) => {
-    res.status(200);
-    res.json({
+    res.status(200).json({
         message: 'CORS is running',
         origin: req.headers.origin,
-        time: new Date().toLocaleDateString('en-GB')
+        time: `${new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })} || ${new Date().toLocaleDateString('en-GB')}`
     });
 });
 
 // auth + validator + sanitize + dataBasePost
-app.post('/protected', cors.corsDefault, validatorAndSanitize.sanitizeAndValidateRegister, hash.hashingPassword, dataBase.postDataBase, (req, res) => {
-    res.status(200);
-    res.json({
+app.post('/protected/register', cors.corsDefault, validatorAndSanitize.sanitizeAndValidateRegister, hash.hashingPasswordRegister, dataBase.postDataBaseRegister, (req, res) => {
+    res.status(200).json({
         message: 'data has been send to database',
         data: req.body,
-        time: new Date().toLocaleDateString('en-GB')
+        timeRegister: `${new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })} || ${new Date().toLocaleDateString('en-GB')}`
+    });
+});
+
+app.post(`/protected/login`, cors.corsDefault, validatorAndSanitize.sanitizeAndValidateLogin, dataBase.postDataBaselogin, (req, res) => {
+    res.status(200).json({
+        message: 'Welcome to your account',
+
     });
 });
 
 // cors + dataBAseGet
-app.get('/protected', cors.corsDefault, dataBase.getDataBase, (req, res) => {
+app.get('/protected/database', cors.corsDefault, dataBase.getDataBase, (req, res) => {
     res.status(200);
 });
 
