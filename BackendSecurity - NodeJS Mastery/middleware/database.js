@@ -38,8 +38,8 @@ const dataBaseCheckLogin = (req) => {
     let error = [];
     const { email } = req.body;
 
-    const dataBaseFindEmail = database.some(e => e.email === email);
-    if (!dataBaseFindEmail) error.push('cannot find the email');
+    const dataBaseCheckEmail = database.some(e => e.email === email);
+    if (!dataBaseCheckEmail) error.push('cannot find the email');
 
     return error;
 };
@@ -74,9 +74,15 @@ const postDataBaselogin = async (req, res, next) => {
 
         const { email, password } = req.body;
         const dataBaseFindEmail = database.find(e => e.email === email);
-        const compare = await bcrypt.compare(password, dataBaseFindEmail.hashedPassword);
 
+        const compare = await bcrypt.compare(password, dataBaseFindEmail.hashedPassword);
         if (!compare) return res.status(400).json({ error: 'cannot find password' });
+        dataBaseFindEmail.lastLogin = `${new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })} || ${new Date().toLocaleDateString('en-GB')}`;
+
+        res.json({
+            message: 'Welcome to your account',
+            lastLogin: dataBaseFindEmail.lastLogin
+        });
 
         console.log('-------------------------------------\n success login to account  \n-------------------------------------\n\n');
 

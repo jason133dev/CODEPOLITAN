@@ -49,10 +49,7 @@ app.post('/protected/register', cors.corsDefault, validatorAndSanitize.sanitizeA
 });
 
 app.post(`/protected/login`, cors.corsDefault, validatorAndSanitize.sanitizeAndValidateLogin, dataBase.postDataBaselogin, (req, res) => {
-    res.status(200).json({
-        message: 'Welcome to your account',
-
-    });
+    res.status(200);
 });
 
 // cors + dataBAseGet
