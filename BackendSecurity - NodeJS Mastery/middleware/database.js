@@ -23,23 +23,25 @@ const safeDataBase = (req) => {
 
 const dataBaseCheckRegister = (req) => {
     let error = []
-    const { email, username, hashedPassword } = req.body;
+    const { email, username } = req.body;
 
     const dataBaseCheckEmail = database.some(e => e.email === email);
     const dataBaseCheckUsername = database.some(e => e.username === username);
-    const dataBaseCheckHashedPassword = database.some(e => e.hashedPassword === hashedPassword);
 
-    if (dataBaseCheckEmail || dataBaseCheckUsername || dataBaseCheckHashedPassword) error.push('email or username or password already exists');
+    if (dataBaseCheckEmail || dataBaseCheckUsername) error.push('email or username or password already exists');
 
     return error;
 };
 
-const dataBaseCheckLogin = (req) => {
+const dataBaseCheckLogin = async (req) => {
     let error = [];
-    const { email } = req.body;
+    const { email, password } = req.body;
 
-    const dataBaseCheckEmail = database.some(e => e.email === email);
-    if (!dataBaseCheckEmail) error.push('cannot find the email');
+    const dataBaseFindEmail = database.find(e => e.email === email);
+    if (!dataBaseFindEmail) error.push('cannot find the email');
+
+    const compare = await bcrypt.compare(password, dataBaseFindEmail.hashedPassword);
+    if (!compare) error.push('cannot find the password');
 
     return error;
 };
@@ -47,9 +49,7 @@ const dataBaseCheckLogin = (req) => {
 // ------------------------------------- export module -------------------------------------
 
 const getDataBase = (req, res, next) => {
-    res.json({ database: database });
-
-    next();
+    res.status(200).json({ database: database });
 };
 
 const postDataBaseRegister = (req, res, next) => {
@@ -66,27 +66,22 @@ const postDataBaseRegister = (req, res, next) => {
 
 const postDataBaselogin = async (req, res, next) => {
     try {
-        const error = dataBaseCheckLogin(req);
+        const error = await dataBaseCheckLogin(req);
         if (error.length > 0) {
             console.log('-------------------------------------\n cannot find email  \n-------------------------------------\n\n');
             return res.status(400).json({ errors: error });
         }
 
-        const { email, password } = req.body;
+        const { email } = req.body;
         const dataBaseFindEmail = database.find(e => e.email === email);
-
-        const compare = await bcrypt.compare(password, dataBaseFindEmail.hashedPassword);
-        if (!compare) return res.status(400).json({ error: 'cannot find password' });
         dataBaseFindEmail.lastLogin = `${new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })} || ${new Date().toLocaleDateString('en-GB')}`;
 
-        res.json({
+        res.status(200).json({
             message: 'Welcome to your account',
             lastLogin: dataBaseFindEmail.lastLogin
         });
 
         console.log('-------------------------------------\n success login to account  \n-------------------------------------\n\n');
-
-        next();
     } catch (error) {
         console.log('-------------------------------------\n internal server error during compare password \n-------------------------------------');
         return res.status(500).json({ error: `Internal server error during compare password: ${error}` });

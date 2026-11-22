@@ -39,7 +39,7 @@ app.get('/test-cors', cors.corsDefault, (req, res) => {
     });
 });
 
-// auth + validator + sanitize + dataBasePost
+// auth + validator + sanitize + hash + dataBasePost
 app.post('/protected/register', cors.corsDefault, validatorAndSanitize.sanitizeAndValidateRegister, hash.hashingPasswordRegister, dataBase.postDataBaseRegister, (req, res) => {
     res.status(200).json({
         message: 'data has been send to database',
@@ -48,14 +48,11 @@ app.post('/protected/register', cors.corsDefault, validatorAndSanitize.sanitizeA
     });
 });
 
-app.post(`/protected/login`, cors.corsDefault, validatorAndSanitize.sanitizeAndValidateLogin, dataBase.postDataBaselogin, (req, res) => {
-    res.status(200);
-});
+// auth + validator + sanitize + dataBaseLogin
+app.post(`/protected/login`, cors.corsDefault, validatorAndSanitize.sanitizeAndValidateLogin, dataBase.postDataBaselogin);
 
 // cors + dataBAseGet
-app.get('/protected/database', cors.corsDefault, dataBase.getDataBase, (req, res) => {
-    res.status(200);
-});
+app.get('/protected/database', cors.corsDefault, dataBase.getDataBase);
 
 // ------------------------------------- server listen -------------------------------------
 
@@ -69,8 +66,3 @@ app.listen(port, () => {
         })
     );
 });
-
-// ------------------------------------- export -------------------------------------
-
-// export
-export default app;
