@@ -11,12 +11,15 @@ import cors from './middleware/cors.js';
 import validatorAndSanitize from './middleware/validatorAndSanitize.js';
 import hash from './middleware/hashing.js';
 import dataBase from './middleware/database.js';
+import authJwt from './middleware/authJwt.js';
+
+// ------------------------------------- env -------------------------------------
+
+const port = process.env.PORT;
 
 // ------------------------------------- app setup -------------------------------------
 
 const app = express();
-const port = process.env.PORT;
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -40,7 +43,7 @@ app.get('/test-cors', cors.corsDefault, (req, res) => {
 });
 
 // auth + validator + sanitize + hash + dataBasePost
-app.post('/protected/register', cors.corsDefault, validatorAndSanitize.sanitizeAndValidateRegister, hash.hashingPasswordRegister, dataBase.postDataBaseRegister, (req, res) => {
+app.post('/register', cors.corsDefault, validatorAndSanitize.sanitizeAndValidateRegister, hash.hashingPasswordRegister, dataBase.postDataBaseRegister, (req, res) => {
     res.status(200).json({
         message: 'data has been send to database',
         data: req.body,
@@ -49,10 +52,17 @@ app.post('/protected/register', cors.corsDefault, validatorAndSanitize.sanitizeA
 });
 
 // auth + validator + sanitize + dataBaseLogin
-app.post(`/protected/login`, cors.corsDefault, validatorAndSanitize.sanitizeAndValidateLogin, dataBase.postDataBaselogin);
+app.post(`/login`, cors.corsDefault, validatorAndSanitize.sanitizeAndValidateLogin, dataBase.postDataBaselogin, authJwt.generateToken, (req, res) => {
+    res.status(200).json({
+        message: req.body.message,
+        lastLogin: req.body.lastLogin,
+        role: req.body.role,
+        token: req.body.token
+    });
+});
 
 // cors + dataBAseGet
-app.get('/protected/database', cors.corsDefault, dataBase.getDataBase);
+app.get('/database', cors.corsDefault, dataBase.getDataBase);
 
 // ------------------------------------- server listen -------------------------------------
 

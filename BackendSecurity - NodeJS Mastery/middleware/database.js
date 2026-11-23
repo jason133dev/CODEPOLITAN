@@ -21,7 +21,7 @@ const safeDataBase = (req) => {
     console.log('-------------------------------------\n safe at database \n-------------------------------------\n\n');
 };
 
-const dataBaseCheckRegister = (req) => {
+const errorCheckRegister = (req) => {
     let error = []
     const { email, username } = req.body;
 
@@ -33,7 +33,7 @@ const dataBaseCheckRegister = (req) => {
     return error;
 };
 
-const dataBaseCheckLogin = async (req) => {
+const errorCheckLogin = async (req) => {
     let error = [];
     const { email, password } = req.body;
 
@@ -53,7 +53,7 @@ const getDataBase = (req, res, next) => {
 };
 
 const postDataBaseRegister = (req, res, next) => {
-    const error = dataBaseCheckRegister(req);
+    const error = errorCheckRegister(req);
     if (error.length > 0) {
         console.log('-------------------------------------\n failed safe at database \n-------------------------------------\n\n');
         return res.status(400).json({ errors: error });
@@ -66,7 +66,7 @@ const postDataBaseRegister = (req, res, next) => {
 
 const postDataBaselogin = async (req, res, next) => {
     try {
-        const error = await dataBaseCheckLogin(req);
+        const error = await errorCheckLogin(req);
         if (error.length > 0) {
             console.log('-------------------------------------\n cannot find email  \n-------------------------------------\n\n');
             return res.status(400).json({ errors: error });
@@ -76,12 +76,13 @@ const postDataBaselogin = async (req, res, next) => {
         const dataBaseFindEmail = database.find(e => e.email === email);
         dataBaseFindEmail.lastLogin = `${new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })} || ${new Date().toLocaleDateString('en-GB')}`;
 
-        res.status(200).json({
-            message: 'Welcome to your account',
-            lastLogin: dataBaseFindEmail.lastLogin
-        });
+        req.body.message = 'Welcome to your account';
+        req.body.lastLogin = dataBaseFindEmail.lastLogin;
+        req.body.role = 'user';
 
         console.log('-------------------------------------\n success login to account  \n-------------------------------------\n\n');
+
+        next();
     } catch (error) {
         console.log('-------------------------------------\n internal server error during compare password \n-------------------------------------');
         return res.status(500).json({ error: `Internal server error during compare password: ${error}` });

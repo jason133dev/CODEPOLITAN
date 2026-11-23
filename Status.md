@@ -44,9 +44,9 @@
 - [x] Validasi Input Bagian 2 (12-11-2026)
 - [x] Validasi Input Bagian 3 (13-11-2026)
 - [x] Sanitasi (19-11-2026)
-- [ ] Basic Auth Bagian 1
-- [ ] Basic Auth Bagian 2
-- [ ] Basic Auth Bagian 3
+- [x] Basic Auth Bagian 1 (23-11-2026)
+- [x] Basic Auth Bagian 2 (23-11-2026)
+- [x] Basic Auth Bagian 3 (23-11-2026)
 - [ ] Hashing Bagian 1
 - [ ] Hashing Bagian 2
 - [ ] Farmasi Management Stock Prepare
