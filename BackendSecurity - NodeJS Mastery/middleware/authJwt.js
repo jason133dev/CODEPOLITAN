@@ -19,6 +19,21 @@ const errorCheck = (req) => {
     return error;
 };
 
+const jwtLogin = (req) => {
+    const authHeader = req.headers.authorization;
+    const token = authHeader.split(' ')[1];
+    const tokenDecoded = jwt.verify(token, JWT_SECRET);
+
+    const format = {
+        email: tokenDecoded.email,
+        username: tokenDecoded.username,
+        message: 'welcome again to your account'
+    }
+
+    req.body.profile = format;
+    console.log('-------------------------------------\n success login to account from jwt  \n-------------------------------------\n\n');
+};
+
 // ------------------------------------- export module -------------------------------------
 
 const generateToken = (req, res, next) => {
@@ -37,19 +52,8 @@ const verifyToken = (req, res, next) => {
     const error = errorCheck(req);
     if (error.length > 0) return res.status(401).json({ errors: error });
 
-    const authHeader = req.headers.authorization;
-    const token = authHeader.split(' ')[1];
-
     try {
-        const tokenDecoded = jwt.verify(token, JWT_SECRET);
-
-        const format = {
-            email: tokenDecoded.email,
-            username: tokenDecoded.username,
-            message: 'welcome again to your account'
-        }
-
-        req.body.profile = format;
+        jwtLogin(req);
 
         next();
     } catch (error) {

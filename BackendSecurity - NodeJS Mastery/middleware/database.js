@@ -4,21 +4,42 @@ import bcrypt from 'bcrypt';
 
 // ------------------------------------- database -------------------------------------
 
-let database = [];
+let database = [
+    {
+        "email": "leejasoneffect@gmail.com",
+        "hashedPassword": "$2b$10$RHtBDp.na5IwKqf33jKTmeoOs9KqzuLr9T93oKr.WmOSC9TZc27hq",
+        "username": "zaxon_133",
+        "timeRegister": "12:08:08 || 24/11/2026",
+        "role": 'admin'
+    }
+];
 
 // ------------------------------------- function tool -------------------------------------
 
-const safeDataBase = (req) => {
+const safeDataBaseRegister = (req) => {
     const { email, hashedPassword, username } = req.body;
     const safeFormat = {
         email: email,
         hashedPassword: hashedPassword,
         username: username,
-        timeRegister: `${new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })} || ${new Date().toLocaleDateString('en-GB')}`
+        timeRegister: `${new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })} || ${new Date().toLocaleDateString('en-GB')}`,
+        role: 'user'
     };
 
     database.push(safeFormat);
     console.log('-------------------------------------\n safe at database \n-------------------------------------\n\n');
+};
+
+const DataBaseLogin = (req) => {
+    const { email } = req.body;
+    const dataBaseFindEmail = database.find(e => e.email === email);
+    dataBaseFindEmail.lastLogin = `${new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })} || ${new Date().toLocaleDateString('en-GB')}`;
+
+    req.body.message = 'Welcome to your account';
+    req.body.lastLogin = dataBaseFindEmail.lastLogin;
+    req.body.role = dataBaseFindEmail.role;
+
+    console.log('-------------------------------------\n success login to account  \n-------------------------------------\n\n');
 };
 
 const errorCheckRegister = (req) => {
@@ -46,17 +67,6 @@ const errorCheckLogin = async (req) => {
     return error;
 };
 
-const errorCheckLoginDashboard = (req) => {
-    let error = [];
-    const tokenDecoded = req.body.tokenDecoded;
-    const { email } = tokenDecoded;
-
-    const dataBaseFindEmail = database.find(e => e.email === email);
-    if (!dataBaseFindEmail) error.push('cannot find the email');
-
-    return error;
-};
-
 // ------------------------------------- export module -------------------------------------
 
 const getDataBase = (req, res, next) => {
@@ -72,7 +82,7 @@ const postDataBaseRegister = (req, res, next) => {
         return res.status(400).json({ errors: error });
     }
 
-    safeDataBase(req);
+    safeDataBaseRegister(req);
 
     next();
 };
@@ -85,15 +95,7 @@ const postDataBaselogin = async (req, res, next) => {
             return res.status(400).json({ errors: error });
         }
 
-        const { email } = req.body;
-        const dataBaseFindEmail = database.find(e => e.email === email);
-        dataBaseFindEmail.lastLogin = `${new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })} || ${new Date().toLocaleDateString('en-GB')}`;
-
-        req.body.message = 'Welcome to your account';
-        req.body.lastLogin = dataBaseFindEmail.lastLogin;
-        req.body.role = 'user';
-
-        console.log('-------------------------------------\n success login to account  \n-------------------------------------\n\n');
+        DataBaseLogin(req);
 
         next();
     } catch (error) {

@@ -46,8 +46,8 @@ app.get('/test-cors', cors.corsDefault, (req, res) => {
 app.post('/register', cors.corsDefault, validatorAndSanitize.sanitizeAndValidateRegister, hash.hashingPasswordRegister, dataBase.postDataBaseRegister, (req, res) => {
     res.status(200).json({
         message: 'data has been send to database',
-        data: req.body,
-        timeRegister: `${new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })} || ${new Date().toLocaleDateString('en-GB')}`
+        timeRegister: `${new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })} || ${new Date().toLocaleDateString('en-GB')}`,
+        role: req.body.role
     });
 });
 
@@ -61,12 +61,12 @@ app.post(`/login`, cors.corsDefault, validatorAndSanitize.sanitizeAndValidateLog
     });
 });
 
-app.get('/login/dashboard', cors.corsDefault, authJwt.verifyToken,dataBase.getDashboardLogin, (req, res) => {
+app.get('/login/dashboard', cors.corsDefault, authJwt.verifyToken, (req, res) => {
     res.status(200).json({ profile: req.body.profile });
 });
 
 // cors + dataBAseGet
-app.get('/database', cors.corsDefault, (req, res) => {
+app.get('/database', cors.corsDefault, dataBase.getDataBase, (req, res) => {
     res.status(200).json({ database: req.body.database });
 });
 
