@@ -15,6 +15,8 @@ const errorCheck = (req) => {
 
     const authHeader = req.headers.authorization;
     if (!authHeader || !authHeader.startsWith('Bearer ')) error.push('Access denied, please provide a valid token');
+
+    return error;
 };
 
 // ------------------------------------- export module -------------------------------------
@@ -37,6 +39,15 @@ const verifyToken = (req, res, next) => {
 
     const authHeader = req.headers.authorization;
     const token = authHeader.split(' ')[1];
+
+    try {
+        const tokenDecoded = jwt.verify(token, JWT_SECRET);
+        req.body.tokenDecoded = tokenDecoded;
+
+        next();
+    } catch (error) {
+        return res.status(403).json({ errors: 'your token is inncorrect or expired' });
+    }
 };
 
 // ------------------------------------- export -------------------------------------

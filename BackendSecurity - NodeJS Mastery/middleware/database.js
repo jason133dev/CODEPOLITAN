@@ -46,10 +46,23 @@ const errorCheckLogin = async (req) => {
     return error;
 };
 
+const errorCheckLoginDashboard = (req) => {
+    let error = [];
+    const tokenDecoded = req.body.tokenDecoded;
+    const { email } = tokenDecoded;
+
+    const dataBaseFindEmail = database.find(e => e.email === email);
+    if (!dataBaseFindEmail) error.push('cannot find the email');
+
+    return error;
+};
+
 // ------------------------------------- export module -------------------------------------
 
 const getDataBase = (req, res, next) => {
-    res.status(200).json({ database: database });
+    req.body.database = database;
+
+    next();
 };
 
 const postDataBaseRegister = (req, res, next) => {
@@ -89,6 +102,28 @@ const postDataBaselogin = async (req, res, next) => {
     }
 };
 
+const getDashboardLogin = (req, res, next) => {
+    const error = errorCheckLoginDashboard(req);
+    if (error.length > 0) {
+        console.log('-------------------------------------\n cannot find email  \n-------------------------------------\n\n');
+        return res.status(400).json({ errors: error });
+    }
+
+    const tokenDecoded = req.body.tokenDecoded;
+    const { email } = tokenDecoded;
+
+    const dataBaseFindEmail = database.find(e => e.email === email);
+    const format = {
+        email: dataBaseFindEmail.email,
+        username: dataBaseFindEmail.username,
+        message: 'welcome again to your account'
+    }
+
+    req.body.profile = format;
+
+    next();
+};
+
 // ------------------------------------- export -------------------------------------
 
-export default { getDataBase, postDataBaseRegister, postDataBaselogin };
+export default { getDataBase, postDataBaseRegister, postDataBaselogin, getDashboardLogin };

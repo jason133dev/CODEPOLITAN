@@ -61,8 +61,14 @@ app.post(`/login`, cors.corsDefault, validatorAndSanitize.sanitizeAndValidateLog
     });
 });
 
+app.get('/login/dashboard', cors.corsDefault, authJwt.verifyToken,dataBase.getDashboardLogin, (req, res) => {
+    res.status(200).json({ profile: req.body.profile });
+});
+
 // cors + dataBAseGet
-app.get('/database', cors.corsDefault, dataBase.getDataBase);
+app.get('/database', cors.corsDefault, dataBase.getDataBase, (req, res) => {
+    res.status(200).json({ database: req.body.database });
+});
 
 // ------------------------------------- server listen -------------------------------------
 
