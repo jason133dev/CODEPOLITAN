@@ -42,7 +42,14 @@ const verifyToken = (req, res, next) => {
 
     try {
         const tokenDecoded = jwt.verify(token, JWT_SECRET);
-        req.body.tokenDecoded = tokenDecoded;
+
+        const format = {
+            email: tokenDecoded.email,
+            username: tokenDecoded.username,
+            message: 'welcome again to your account'
+        }
+
+        req.body.profile = format;
 
         next();
     } catch (error) {

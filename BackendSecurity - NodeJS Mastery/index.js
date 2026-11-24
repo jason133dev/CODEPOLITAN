@@ -66,7 +66,7 @@ app.get('/login/dashboard', cors.corsDefault, authJwt.verifyToken,dataBase.getDa
 });
 
 // cors + dataBAseGet
-app.get('/database', cors.corsDefault, dataBase.getDataBase, (req, res) => {
+app.get('/database', cors.corsDefault, (req, res) => {
     res.status(200).json({ database: req.body.database });
 });
 

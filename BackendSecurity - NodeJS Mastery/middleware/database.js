@@ -102,28 +102,6 @@ const postDataBaselogin = async (req, res, next) => {
     }
 };
 
-const getDashboardLogin = (req, res, next) => {
-    const error = errorCheckLoginDashboard(req);
-    if (error.length > 0) {
-        console.log('-------------------------------------\n cannot find email  \n-------------------------------------\n\n');
-        return res.status(400).json({ errors: error });
-    }
-
-    const tokenDecoded = req.body.tokenDecoded;
-    const { email } = tokenDecoded;
-
-    const dataBaseFindEmail = database.find(e => e.email === email);
-    const format = {
-        email: dataBaseFindEmail.email,
-        username: dataBaseFindEmail.username,
-        message: 'welcome again to your account'
-    }
-
-    req.body.profile = format;
-
-    next();
-};
-
 // ------------------------------------- export -------------------------------------
 
-export default { getDataBase, postDataBaseRegister, postDataBaselogin, getDashboardLogin };
+export default { getDataBase, postDataBaseRegister, postDataBaselogin };
