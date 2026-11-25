@@ -23,7 +23,7 @@ const errorCheckRegister = (req) => {
 
     if (password) {
         const check = validator.trim(password);
-        if (!validator.isStrongPassword(password)) {
+        if (password.length < 8) {
             error.push("Password terlalu lemah");
         }
 
@@ -32,7 +32,7 @@ const errorCheckRegister = (req) => {
 
     if (username) {
         const check = validator.escape(validator.trim(username));
-        
+
         req.body.username = check;
     }
 

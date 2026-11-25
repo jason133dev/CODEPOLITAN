@@ -8,6 +8,10 @@ dotenv.config();
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
+// ------------------------------------- databaseToken -------------------------------------
+
+let databaseToken = [];
+
 // ------------------------------------- function tool -------------------------------------
 
 const errorCheck = (req) => {
@@ -25,9 +29,10 @@ const jwtLogin = (req) => {
     const tokenDecoded = jwt.verify(token, JWT_SECRET);
 
     const format = {
+        message: 'welcome again to your account',
         email: tokenDecoded.email,
         username: tokenDecoded.username,
-        message: 'welcome again to your account'
+        role: tokenDecoded.role
     }
 
     req.body.profile = format;
@@ -37,13 +42,23 @@ const jwtLogin = (req) => {
 // ------------------------------------- export module -------------------------------------
 
 const generateToken = (req, res, next) => {
+    const { email, username, role } = req.body;
     const payload = {
-        email: req.body.email,
-        username: req.body.username,
-        role: req.body.role
+        email: email,
+        username: username,
+        role: role
     };
 
-    req.body.token = jwt.sign(payload, JWT_SECRET);
+    if (role === 'admin') {
+        req.body.token = jwt.sign(payload, JWT_SECRET);
+    } else {
+        const tokenLong = jwt.sign(payload, JWT_SECRET, { expiresIn: '30d' });
+        databaseToken.push(tokenLong);
+
+        req.body.tokenLong = tokenLong;
+        // besok lanjut buat endpoint baru untuk login dari token long ini
+        req.body.token = jwt.sign(payload, JWT_SECRET, { expiresIn: '60s' });
+    }
 
     next();
 };

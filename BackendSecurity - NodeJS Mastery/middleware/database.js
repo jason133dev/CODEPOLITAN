@@ -4,15 +4,7 @@ import bcrypt from 'bcrypt';
 
 // ------------------------------------- database -------------------------------------
 
-let database = [
-    {
-        "email": "leejasoneffect@gmail.com",
-        "hashedPassword": "$2b$10$RHtBDp.na5IwKqf33jKTmeoOs9KqzuLr9T93oKr.WmOSC9TZc27hq",
-        "username": "zaxon_133",
-        "timeRegister": "12:08:08 || 24/11/2026",
-        "role": 'admin'
-    }
-];
+let database = [];
 
 // ------------------------------------- function tool -------------------------------------
 
@@ -35,6 +27,7 @@ const DataBaseLogin = (req) => {
     const dataBaseFindEmail = database.find(e => e.email === email);
     dataBaseFindEmail.lastLogin = `${new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' })} || ${new Date().toLocaleDateString('en-GB')}`;
 
+    req.body.username = dataBaseFindEmail.username;
     req.body.message = 'Welcome to your account';
     req.body.lastLogin = dataBaseFindEmail.lastLogin;
     req.body.role = dataBaseFindEmail.role;

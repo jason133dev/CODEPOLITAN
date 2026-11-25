@@ -57,7 +57,8 @@ app.post(`/login`, cors.corsDefault, validatorAndSanitize.sanitizeAndValidateLog
         message: req.body.message,
         lastLogin: req.body.lastLogin,
         role: req.body.role,
-        token: req.body.token
+        token: req.body.token,
+        tokenLong: req.body.tokenLong
     });
 });
 
