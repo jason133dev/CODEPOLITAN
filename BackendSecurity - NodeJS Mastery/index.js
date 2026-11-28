@@ -66,6 +66,10 @@ app.get('/login/dashboard', cors.corsDefault, authJwt.verifyToken, (req, res) =>
     res.status(200).json({ profile: req.body.profile });
 });
 
+app.post('/token', cors.corsDefault, authJwt.tokenLongCheck, (req, res) => {
+    res.status(200).json({ newToken: req.body.newToken });
+});
+
 // cors + dataBAseGet
 app.get('/database', cors.corsDefault, dataBase.getDataBase, (req, res) => {
     res.status(200).json({ database: req.body.database });

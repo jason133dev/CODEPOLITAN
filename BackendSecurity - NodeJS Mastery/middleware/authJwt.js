@@ -14,7 +14,7 @@ let databaseToken = [];
 
 // ------------------------------------- function tool -------------------------------------
 
-const errorCheck = (req) => {
+const errorCheckVerify = (req) => {
     let error = [];
 
     const authHeader = req.headers.authorization;
@@ -23,26 +23,23 @@ const errorCheck = (req) => {
     return error;
 };
 
-const jwtLogin = (req) => {
-    const authHeader = req.headers.authorization;
-    const token = authHeader.split(' ')[1];
-    const tokenDecoded = jwt.verify(token, JWT_SECRET);
+const errorCheckTokenLong = (req) => {
+    let error = [];
 
-    const format = {
-        message: 'welcome again to your account',
-        email: tokenDecoded.email,
-        username: tokenDecoded.username,
-        role: tokenDecoded.role
-    }
+    const { tokenLong } = req.body;
+    if (!tokenLong) error.push('No token detected on body');
 
-    req.body.profile = format;
-    console.log('-------------------------------------\n success login to account from jwt  \n-------------------------------------\n\n');
+    const searchTokenLong = databaseToken.includes(tokenLong);
+    if (!searchTokenLong) error.push('Long token is not found in database');
+
+    return error;
 };
 
 // ------------------------------------- export module -------------------------------------
 
 const generateToken = (req, res, next) => {
     const { email, username, role } = req.body;
+
     const payload = {
         email: email,
         username: username,
@@ -56,7 +53,6 @@ const generateToken = (req, res, next) => {
         databaseToken.push(tokenLong);
 
         req.body.tokenLong = tokenLong;
-        // besok lanjut buat endpoint baru untuk login dari token long ini
         req.body.token = jwt.sign(payload, JWT_SECRET, { expiresIn: '60s' });
     }
 
@@ -64,18 +60,52 @@ const generateToken = (req, res, next) => {
 };
 
 const verifyToken = (req, res, next) => {
-    const error = errorCheck(req);
+    const error = errorCheckVerify(req);
     if (error.length > 0) return res.status(401).json({ errors: error });
 
     try {
-        jwtLogin(req);
+        const authHeader = req.headers.authorization;
+        const token = authHeader.split(' ')[1];
+        const tokenDecoded = jwt.verify(token, JWT_SECRET);
+
+        const format = {
+            message: 'welcome again to your account',
+            email: tokenDecoded.email,
+            username: tokenDecoded.username,
+            role: tokenDecoded.role
+        }
+
+        req.body.profile = format;
+        console.log('-------------------------------------\n success login to account from jwt  \n-------------------------------------\n\n');
 
         next();
     } catch (error) {
-        return res.status(403).json({ errors: 'your token is inncorrect or expired' });
+        return res.status(403).json({ errors: `your token is inncorrect or expired: ${error}` });
+    }
+};
+
+const tokenLongCheck = (req, res, next) => {
+    const error = errorCheckTokenLong(req);
+    if (error.length > 0) return res.status(401).json({ errors: error });
+
+    try {
+        const { tokenLong } = req.body;
+        const tokenLongDecoded = jwt.verify(tokenLong, JWT_SECRET);
+
+        const payload = {
+            email: tokenLongDecoded.email,
+            username: tokenLongDecoded.username,
+            role: tokenLongDecoded.role
+        };
+
+        req.body.newToken = jwt.sign(payload, JWT_SECRET, { expiresIn: '60s' });
+
+        next();
+    } catch (error) {
+        return res.status(403).json({ errors: `your token is inncorrect or expired: ${error}` });
     }
 };
 
 // ------------------------------------- export -------------------------------------
 
-export default { generateToken, verifyToken };
+export default { generateToken, verifyToken, tokenLongCheck };
